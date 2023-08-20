@@ -6,7 +6,7 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 import io.horizontalsystems.erc20kit.models.TokenBalance
-import io.horizontalsystems.ethereumkit.api.storage.RoomTypeConverters
+import io.horizontalsystems.komercokit.api.storage.RoomTypeConverters
 
 @Database(entities = [TokenBalance::class], version = 5, exportSchema = true)
 @TypeConverters(RoomTypeConverters::class)

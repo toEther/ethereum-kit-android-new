@@ -1,7 +1,7 @@
 package io.horizontalsystems.oneinchkit.contracts.v5
 
-import io.horizontalsystems.ethereumkit.contracts.ContractMethod
-import io.horizontalsystems.ethereumkit.models.Address
+import io.horizontalsystems.komercokit.contracts.ContractMethod
+import io.horizontalsystems.komercokit.models.Address
 import java.math.BigInteger
 
 class UnoswapMethodV5(

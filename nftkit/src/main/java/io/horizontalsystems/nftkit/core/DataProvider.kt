@@ -1,15 +1,15 @@
 package io.horizontalsystems.nftkit.core
 
-import io.horizontalsystems.ethereumkit.core.EthereumKit
-import io.horizontalsystems.ethereumkit.models.Address
-import io.horizontalsystems.ethereumkit.spv.core.toInt
+import io.horizontalsystems.komercokit.core.KomercoKit
+import io.horizontalsystems.komercokit.models.Address
+import io.horizontalsystems.komercokit.spv.core.toInt
 import io.horizontalsystems.nftkit.contracts.Eip1155BalanceOfMethod
 import io.horizontalsystems.nftkit.contracts.Eip721OwnerOfMethod
 import kotlinx.coroutines.rx2.await
 import java.math.BigInteger
 
 class DataProvider(
-    private val evmKit: EthereumKit
+    private val evmKit: KomercoKit
 ) {
     suspend fun getEip721Owner(contractAddress: Address, tokenId: BigInteger): Address {
         val address = evmKit.call(contractAddress, Eip721OwnerOfMethod(tokenId).encodedABI()).await()

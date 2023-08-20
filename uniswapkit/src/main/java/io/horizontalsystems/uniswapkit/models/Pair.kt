@@ -1,8 +1,8 @@
 package io.horizontalsystems.uniswapkit.models
 
-import io.horizontalsystems.ethereumkit.core.hexStringToByteArray
-import io.horizontalsystems.ethereumkit.crypto.CryptoUtils
-import io.horizontalsystems.ethereumkit.models.Address
+import io.horizontalsystems.komercokit.core.hexStringToByteArray
+import io.horizontalsystems.komercokit.crypto.CryptoUtils
+import io.horizontalsystems.komercokit.models.Address
 import io.horizontalsystems.uniswapkit.PairError
 import java.math.BigInteger
 

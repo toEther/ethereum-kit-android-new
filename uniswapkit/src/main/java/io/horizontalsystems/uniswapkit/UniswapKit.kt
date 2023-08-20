@@ -1,8 +1,8 @@
 package io.horizontalsystems.uniswapkit
 
-import io.horizontalsystems.ethereumkit.core.EthereumKit
-import io.horizontalsystems.ethereumkit.models.Address
-import io.horizontalsystems.ethereumkit.models.TransactionData
+import io.horizontalsystems.komercokit.core.KomercoKit
+import io.horizontalsystems.komercokit.models.Address
+import io.horizontalsystems.komercokit.models.TransactionData
 import io.horizontalsystems.uniswapkit.contract.SwapContractMethodFactories
 import io.horizontalsystems.uniswapkit.models.*
 import io.reactivex.Single
@@ -82,17 +82,17 @@ class UniswapKit(
     }
 
     companion object {
-        fun getInstance(ethereumKit: EthereumKit): UniswapKit {
-            val tradeManager = TradeManager(ethereumKit)
-            val tokenFactory = TokenFactory(ethereumKit.chain)
+        fun getInstance(komercoKit: KomercoKit): UniswapKit {
+            val tradeManager = TradeManager(komercoKit)
+            val tokenFactory = TokenFactory(komercoKit.chain)
             val pairSelector = PairSelector(tokenFactory)
 
             return UniswapKit(tradeManager, pairSelector, tokenFactory)
         }
 
-        fun addDecorators(ethereumKit: EthereumKit) {
-            ethereumKit.addMethodDecorator(SwapMethodDecorator(SwapContractMethodFactories))
-            ethereumKit.addTransactionDecorator(SwapTransactionDecorator())
+        fun addDecorators(komercoKit: KomercoKit) {
+            komercoKit.addMethodDecorator(SwapMethodDecorator(SwapContractMethodFactories))
+            komercoKit.addTransactionDecorator(SwapTransactionDecorator())
         }
 
     }

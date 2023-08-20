@@ -1,6 +1,6 @@
 package io.horizontalsystems.oneinchkit.decorations
 
-import io.horizontalsystems.ethereumkit.models.Address
+import io.horizontalsystems.komercokit.models.Address
 import java.math.BigInteger
 
 class OneInchSwapDecoration(

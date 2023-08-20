@@ -58,5 +58,5 @@ dependencies {
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutines_version"
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-rx2:$coroutines_version"
 
-    implementation project(':ethereumkit')
+    implementation project(':komercokit')
 }

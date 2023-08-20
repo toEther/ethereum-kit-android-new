@@ -1,6 +1,6 @@
 package io.horizontalsystems.uniswapkit.models
 
-import io.horizontalsystems.ethereumkit.models.Address
+import io.horizontalsystems.komercokit.models.Address
 import java.math.BigDecimal
 import java.math.BigInteger
 

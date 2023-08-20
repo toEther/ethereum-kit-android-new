@@ -1,9 +1,9 @@
 package io.horizontalsystems.nftkit.core
 
-import io.horizontalsystems.ethereumkit.contracts.ContractEventInstance
-import io.horizontalsystems.ethereumkit.core.hexStringToByteArrayOrNull
-import io.horizontalsystems.ethereumkit.models.Address
-import io.horizontalsystems.ethereumkit.models.TransactionLog
+import io.horizontalsystems.komercokit.contracts.ContractEventInstance
+import io.horizontalsystems.komercokit.core.hexStringToByteArrayOrNull
+import io.horizontalsystems.komercokit.models.Address
+import io.horizontalsystems.komercokit.models.TransactionLog
 import io.horizontalsystems.nftkit.events.Eip721TransferEventInstance
 import java.math.BigInteger
 

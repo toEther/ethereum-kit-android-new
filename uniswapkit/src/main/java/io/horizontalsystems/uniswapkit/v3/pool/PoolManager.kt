@@ -1,22 +1,22 @@
 package io.horizontalsystems.uniswapkit.v3.pool
 
-import io.horizontalsystems.ethereumkit.core.EthereumKit
-import io.horizontalsystems.ethereumkit.models.Address
-import io.horizontalsystems.ethereumkit.models.Chain
-import io.horizontalsystems.ethereumkit.spv.core.toBigInteger
+import io.horizontalsystems.komercokit.core.KomercoKit
+import io.horizontalsystems.komercokit.models.Address
+import io.horizontalsystems.komercokit.models.Chain
+import io.horizontalsystems.komercokit.spv.core.toBigInteger
 import io.horizontalsystems.uniswapkit.models.Fraction
 import io.horizontalsystems.uniswapkit.v3.FeeAmount
 import kotlinx.coroutines.rx2.await
 import java.math.BigInteger
 
-class PoolManager(private val ethereumKit: EthereumKit) {
-    private val factoryAddress = when (ethereumKit.chain) {
-        Chain.Ethereum,
+class PoolManager(private val komercoKit: KomercoKit) {
+    private val factoryAddress = when (komercoKit.chain) {
+        Chain.Komerco,
         Chain.Polygon,
         Chain.Optimism,
         Chain.ArbitrumOne,
-        Chain.EthereumGoerli -> "0x1F98431c8aD98523631AE4a59f267346ea31F984"
-        else -> throw IllegalStateException("Not supported chain ${ethereumKit.chain}")
+        Chain.KomercoGoerli -> "0x1F98431c8aD98523631AE4a59f267346ea31F984"
+        else -> throw IllegalStateException("Not supported chain ${komercoKit.chain}")
     }
 
     // get price of tokenA in tokenB
@@ -38,7 +38,7 @@ class PoolManager(private val ethereumKit: EthereumKit) {
     }
 
     private suspend fun ethCall(contractAddress: Address, data: ByteArray): ByteArray {
-        return ethereumKit.call(contractAddress, data).await()
+        return komercoKit.call(contractAddress, data).await()
     }
 }
 

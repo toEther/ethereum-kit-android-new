@@ -1,10 +1,10 @@
 package io.horizontalsystems.oneinchkit.contracts.v4
 
-import io.horizontalsystems.ethereumkit.contracts.Bytes32Array
-import io.horizontalsystems.ethereumkit.contracts.ContractMethod
-import io.horizontalsystems.ethereumkit.contracts.ContractMethodFactory
-import io.horizontalsystems.ethereumkit.contracts.ContractMethodHelper
-import io.horizontalsystems.ethereumkit.models.Address
+import io.horizontalsystems.komercokit.contracts.Bytes32Array
+import io.horizontalsystems.komercokit.contracts.ContractMethod
+import io.horizontalsystems.komercokit.contracts.ContractMethodFactory
+import io.horizontalsystems.komercokit.contracts.ContractMethodHelper
+import io.horizontalsystems.komercokit.models.Address
 import java.math.BigInteger
 
 class UnoswapMethodFactoryV4 : ContractMethodFactory {

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="io.horizontalsystems.ethereumkit.sample">
+    package="io.horizontalsystems.komercokit.sample">
 
 
     <uses-permission android:name="android.permission.INTERNET" />
@@ -16,7 +16,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name="io.horizontalsystems.ethereumkit.sample.modules.main.MainActivity"
+            android:name="io.horizontalsystems.komercokit.sample.modules.main.MainActivity"
             android:exported="true"
             android:screenOrientation="portrait">
             <intent-filter>

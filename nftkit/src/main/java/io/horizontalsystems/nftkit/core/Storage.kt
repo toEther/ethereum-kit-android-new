@@ -1,6 +1,6 @@
 package io.horizontalsystems.nftkit.core
 
-import io.horizontalsystems.ethereumkit.models.Address
+import io.horizontalsystems.komercokit.models.Address
 import io.horizontalsystems.nftkit.core.db.NftKitDatabase
 import io.horizontalsystems.nftkit.models.*
 import java.math.BigInteger

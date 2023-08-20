@@ -1,17 +1,17 @@
-# EthereumKit
+# KomercoKit
 
-`EthereumKit` is a native(Kotlin) toolkit for EVM compatible networks. It's implemented and used by [Unstoppable Wallet](https://github.com/horizontalsystems/unstoppable-wallet-android), a multi-currency crypto wallet. It implements a lot of features of the DeFi world natively *(no need for WalletConnect)* out-of-the-box.
+`KomercoKit` is a native(Kotlin) toolkit for EVM compatible networks. It's implemented and used by [Unstoppable Wallet](https://github.com/horizontalsystems/unstoppable-wallet-android), a multi-currency crypto wallet. It implements a lot of features of the DeFi world natively *(no need for WalletConnect)* out-of-the-box.
 
 ## Core Features
 
-- [x] Restore with **mnemonic phrase**, **BIP39 Seed**, **EVM private key**, or simply an **Ethereum address**
+- [x] Restore with **mnemonic phrase**, **BIP39 Seed**, **EVM private key**, or simply an **Komerco address**
 - [x] Local storage of account data (ETH, Token/NFT balance and transactions)
 - [x] Synchronization over **HTTP/WebSocket**
 - [x] **Watch accounts**. Restore with any address
-- [x] Ethereum Name Service **(ENS) support**
+- [x] Komerco Name Service **(ENS) support**
 - [x] **EIP-1559** Gas Prices with live updates
 - [x] Reactive-functional API by [`RxAndroid`](https://github.com/ReactiveX/RxAndroid)
-- [x] Implementation of Ethereum's JSON-RPC API
+- [x] Implementation of Komerco's JSON-RPC API
 - [x] Support for Infura and Etherscan
 - [x] Can be extended to natively support any smart contract
 - [x] EIP20 token standard support
@@ -21,9 +21,9 @@
 
 ## Blockchains supported
 
-Any EVM blockchain that supports the Ethereum's RPC API and has an Etherscan-like block explorer can be easily integrated to your wallet using `EthereumKit`. The following blockchains are currently integrated to `Unstoppable Wallet`:
+Any EVM blockchain that supports the Komerco's RPC API and has an Etherscan-like block explorer can be easily integrated to your wallet using `KomercoKit`. The following blockchains are currently integrated to `Unstoppable Wallet`:
 
-- Ethereum
+- Komerco
 - Binance Smart Chain
 - Polygon
 - ArbitrumOne
@@ -35,25 +35,25 @@ Any EVM blockchain that supports the Ethereum's RPC API and has an Etherscan-lik
 
 ### Initialization
 
-First you need to initialize an `EthereumKit` instance
+First you need to initialize an `KomercoKit` instance
 
 ```kotlin
 val context = Application()
 val address = Address("0x..your..address")
 
-val evmKit = EthereumKit.getInstance(
+val evmKit = KomercoKit.getInstance(
     context,
     address,
-    Chain.Ethereum,
-    RpcSource.ethereumInfuraHttp("projectId", "projectSecret"),
-    TransactionSource.ethereumEtherscan("apiKey"),
+    Chain.Komerco,
+    RpcSource.komercoInfuraHttp("projectId", "projectSecret"),
+    TransactionSource.komercoEtherscan("apiKey"),
     "unique_wallet_id"
 )
 ```
 
 ### Starting and Stopping
 
-`EthereumKit` instance requires to be started with `start` command. This start the process of synchronization with the blockchain state.
+`KomercoKit` instance requires to be started with `start` command. This start the process of synchronization with the blockchain state.
 
 ```kotlin
 evmKit.start()
@@ -81,8 +81,8 @@ evmKit.lastBlockHeightFlowable.subscribe { height -> println(height) }
 evmKit.syncStateFlowable.subscribe { state -> println(state) }
 evmKit.transactionsSyncStateFlowable.subscribe { state -> println(state) }
 
-// Subscribe to ETH transactions synced by the kit
-evmKit.getFullTransactionsFlowable(listOf(listOf("ETH"))).subscribe { transactions -> 
+// Subscribe to KMC transactions synced by the kit
+evmKit.getFullTransactionsFlowable(listOf(listOf("KMC"))).subscribe { transactions -> 
     println(transactions.size) 
 }
 
@@ -98,27 +98,27 @@ To send a transaction you need a Signer object. Here's how you can create it usi
 
 ```kotlin
 val seed = Mnemonic().toSeed(listOf("mnemonic", "phrase"), "passphrase_if_exists'")
-val signer = Signer.getInstance(seed, Chain.Ethereum)
+val signer = Signer.getInstance(seed, Chain.Komerco)
 ```
 
 
-Now you can use it to sign an Ethereum transaction:
+Now you can use it to sign an Komerco transaction:
 
 
 ```kotlin
 val toAddress = Address("0x..recipient..address..here")
-val amount = BigInteger("100000000000000000")                         // 0.1 ETH in WEIs
+val amount = BigInteger("100000000000000000")                         // 0.1 KMC in WEIs
 val gasPrice = GasPrice.Legacy(50_000_000_000)
 
 // Construct TransactionData which is the key payload of any EVM transaction
-val transactionData = ethereumKit.transferTransactionData(toAddress, amount)
+val transactionData = komercoKit.transferTransactionData(toAddress, amount)
 
 // Estimate gas for the transaction
-val estimateGasSingle = ethereumKit.estimateGas(transactionData, gasPrice)
+val estimateGasSingle = komercoKit.estimateGas(transactionData, gasPrice)
 
 // Generate a raw transaction which is ready to be signed. This step also synchronizes the nonce
 val rawTransactionSingle = estimateGasSingle.flatMap { estimateGasSingle ->
-    ethereumKit.rawTransaction(transactionData, gasPrice, estimateGasSingle)
+    komercoKit.rawTransaction(transactionData, gasPrice, estimateGasSingle)
 }
 
 val sendSingle = rawTransactionSingle.flatMap { rawTransaction ->
@@ -126,14 +126,14 @@ val sendSingle = rawTransactionSingle.flatMap { rawTransaction ->
     val signature = signer.signature(rawTransaction)
 
     // Send the transaction to RPC node
-    ethereumKit.send(rawTransaction, signature)
+    komercoKit.send(rawTransaction, signature)
 }
 
 // This step is needed for Rx reactive code to run
 val disposables = CompositeDisposable()
 
 sendSingle.subscribe { fullTransaction ->
-    // ethereumKit.send returns FullTransaction object that contains transaction and a transaction decoration
+    // komercoKit.send returns FullTransaction object that contains transaction and a transaction decoration
     val transaction = fullTransaction.transaction
 
     println("Transaction sent: ${transaction.hash.toHexString()}")
@@ -144,12 +144,12 @@ sendSingle.subscribe { fullTransaction ->
 }
 ```
 
-### Get ETH transactions
+### Get KMC transactions
 
 The following code retrieves the transactions that have `ETH` coin incoming or outgoing, including the transactions where `ETH` is received in internal transactions.
 
 ```kotlin
-ethereumKit.getFullTransactionsAsync(listOf(listOf("ETH")))
+komercoKit.getFullTransactionsAsync(listOf(listOf("KMC")))
         .subscribe { fullTransactions ->
             for (fullTransaction in fullTransactions) {
                 println("Transaction hash: ${fullTransaction.transaction.hash.toHexString()}")
@@ -179,13 +179,13 @@ ethereumKit.getFullTransactionsAsync(listOf(listOf("ETH")))
 
 ```kotlin
 val contractAddress = Address("0x..token..contract..address..")
-val erc20Kit = Erc20Kit.getInstance(context, ethereumKit, contractAddress)
+val erc20Kit = Erc20Kit.getInstance(context, komercoKit, contractAddress)
 
 // Decorators are needed to detect transactions as `Erc20` transfer/approve transactions
-Erc20Kit.addTransactionSyncer(ethereumKit)
+Erc20Kit.addTransactionSyncer(komercoKit)
         
 // Erc20 transactions syncer is needed to pull Eip20 transfer transactions from Etherscan
-Erc20Kit.addDecorators(ethereumKit)
+Erc20Kit.addDecorators(komercoKit)
 ```
 
 ### Get token balance
@@ -206,13 +206,13 @@ val gasPrice = GasPrice.Legacy(50_000_000_000)
 // Construct TransactionData which calls a `Transfer` method of the EIP20 compatible smart contract
 val transactionData = erc20Kit.buildTransferTransactionData(toAddress, amount)
 
-ethereumKit.estimateGas(transactionData, gasPrice)
+komercoKit.estimateGas(transactionData, gasPrice)
         .flatMap { estimateGasSingle ->
-            ethereumKit.rawTransaction(transactionData, gasPrice, estimateGasSingle)
+            komercoKit.rawTransaction(transactionData, gasPrice, estimateGasSingle)
         }
         .flatMap { rawTransaction ->
             val signature = signer.signature(rawTransaction)
-            ethereumKit.send(rawTransaction, signature)
+            komercoKit.send(rawTransaction, signature)
         }
         .subscribe { fullTransaction ->
             println("Transaction sent: ${fullTransaction.transaction.hash.toHexString()}")
@@ -230,7 +230,7 @@ ethereumKit.estimateGas(transactionData, gasPrice)
 ### Get Erc20 transactions
 
 ```kotlin
-ethereumKit.getFullTransactionsAsync(listOf(listOf(contractAddress.eip55)))
+komercoKit.getFullTransactionsAsync(listOf(listOf(contractAddress.eip55)))
         .subscribe { fullTransactions ->
             for (fullTransaction in fullTransactions) {
                 println("Transaction sent: ${fullTransaction.transaction.hash.toHexString()}")
@@ -259,10 +259,10 @@ ethereumKit.getFullTransactionsAsync(listOf(listOf(contractAddress.eip55)))
 ### Initialization
 
 ```kotlin
-val uniswapKit = UniswapKit.getInstance(ethereumKit)
+val uniswapKit = UniswapKit.getInstance(komercoKit)
 
 // Decorators are needed to detect and decorate transactions as `Uniswap` transactions
-UniswapKit.addDecorators(ethereumKit)
+UniswapKit.addDecorators(komercoKit)
 ```
 
 ### Send sample swap transaction
@@ -284,14 +284,14 @@ uniswapKit.swapData(tokenIn, tokenOut)
             uniswapKit.transactionData(tradeData)
         }
         .flatMap { transactionData ->
-            ethereumKit.estimateGas(transactionData, gasPrice)
+            komercoKit.estimateGas(transactionData, gasPrice)
                     .flatMap { estimateGasSingle ->
-                        ethereumKit.rawTransaction(transactionData, gasPrice, estimateGasSingle)
+                        komercoKit.rawTransaction(transactionData, gasPrice, estimateGasSingle)
                     }
         }
         .flatMap { rawTransaction ->
             val signature = signer.signature(rawTransaction)
-            ethereumKit.send(rawTransaction, signature)
+            komercoKit.send(rawTransaction, signature)
         }
         .subscribe { fullTransaction ->
             println("Transaction sent: ${fullTransaction.transaction.hash.toHexString()}")
@@ -302,7 +302,7 @@ uniswapKit.swapData(tokenIn, tokenOut)
 
 ### ExactIn/ExactOut
 
-With `UniswapKit` you can build swap transaction that either has an exact `In` or exact `Out` amount. That is, if you want to swap exactly 1 ETH to USDT, you get `TradeData` using `bestTradeExactIn` method. Similarly, if you want to swap ETH to USDT and you want to get exactly 1000 USDT, then you get `TradeData` using `bestTradeExactOut`
+With `UniswapKit` you can build swap transaction that either has an exact `In` or exact `Out` amount. That is, if you want to swap exactly 1 KMC to USDT, you get `TradeData` using `bestTradeExactIn` method. Similarly, if you want to swap KMC to USDT and you want to get exactly 1000 USDT, then you get `TradeData` using `bestTradeExactOut`
 
 ### Trade Options
 
@@ -317,8 +317,8 @@ With `UniswapKit` you can build swap transaction that either has an exact `In` o
 
 
 ```kotlin
-val oneInchKit = OneInchKit.getInstance(ethereumKit)
-OneInchKit.addDecorators(ethereumKit)
+val oneInchKit = OneInchKit.getInstance(komercoKit)
+OneInchKit.addDecorators(komercoKit)
 ```
 
 ### Sample code to get swap data from 1Inch API, sign it and send to RPC node
@@ -343,11 +343,11 @@ oneInchKit.getSwapAsync(
             val tx = swap.transaction
             val transactionData = TransactionData(tx.to, tx.value, tx.data)
 
-            ethereumKit.rawTransaction(transactionData, gasPrice, tx.gasLimit)
+            komercoKit.rawTransaction(transactionData, gasPrice, tx.gasLimit)
         }
         .flatMap { rawTransaction ->
             val signature = signer.signature(rawTransaction)
-            ethereumKit.send(rawTransaction, signature)
+            komercoKit.send(rawTransaction, signature)
         }
         .subscribe { fullTransaction ->
             println("Transaction sent: ${fullTransaction.transaction.hash.toHexString()}")
@@ -363,7 +363,7 @@ NftKit support EIP721 and EIP1155
 ### Initialization
 
 ```kotlin
-val nftKit = NftKit.getInstance(App.instance, ethereumKit)
+val nftKit = NftKit.getInstance(App.instance, komercoKit)
 
 nftKit.addEip721Decorators()
 nftKit.addEip1155Decorators()
@@ -396,13 +396,13 @@ val gasPrice = GasPrice.Legacy(50_000_000_000)
 // Construct a TransactionData
 val transactionData = nftKit.transferEip721TransactionData(nftContractAddress, to, tokenId)
 
-ethereumKit.estimateGas(transactionData, gasPrice)
+komercoKit.estimateGas(transactionData, gasPrice)
         .flatMap { estimateGasSingle ->
-            ethereumKit.rawTransaction(transactionData, gasPrice, estimateGasSingle)
+            komercoKit.rawTransaction(transactionData, gasPrice, estimateGasSingle)
         }
         .flatMap { rawTransaction ->
             val signature = signer.signature(rawTransaction)
-            ethereumKit.send(rawTransaction, signature)
+            komercoKit.send(rawTransaction, signature)
         }
         .subscribe { fullTransaction ->
             println("Transaction sent: ${fullTransaction.transaction.hash.toHexString()}")
@@ -433,15 +433,15 @@ repositories {
 Add the following dependency to your build.gradle file:
 ```
 dependencies {
-    implementation 'com.github.horizontalsystems:ethereum-kit-android:master-SNAPSHOT'
+    implementation 'com.github.horizontalsystems:komerco-kit-android:master-SNAPSHOT'
 }
 ```
 
 ## Example App
 
 All features of the library are used in example project. It can be referred as a starting point for usage of the library.
-* [Example App](https://github.com/horizontalsystems/ethereum-kit-android/tree/master/app)
+* [Example App](https://github.com/horizontalsystems/komerco-kit-android/tree/master/app)
 
 ## License
 
-The `EthereumKit` is open source and available under the terms of the [MIT License](https://github.com/horizontalsystems/ethereum-kit-android/blob/master/LICENSE)
+The `KomercoKit` is open source and available under the terms of the [MIT License](https://github.com/horizontalsystems/komerco-kit-android/blob/master/LICENSE)

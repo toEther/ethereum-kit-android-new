@@ -1,11 +1,11 @@
 package io.horizontalsystems.uniswapkit
 
-import io.horizontalsystems.ethereumkit.contracts.ContractMethod
-import io.horizontalsystems.ethereumkit.core.EthereumKit
-import io.horizontalsystems.ethereumkit.core.toHexString
-import io.horizontalsystems.ethereumkit.models.Address
-import io.horizontalsystems.ethereumkit.models.Chain
-import io.horizontalsystems.ethereumkit.models.TransactionData
+import io.horizontalsystems.komercokit.contracts.ContractMethod
+import io.horizontalsystems.komercokit.core.KomercoKit
+import io.horizontalsystems.komercokit.core.toHexString
+import io.horizontalsystems.komercokit.models.Address
+import io.horizontalsystems.komercokit.models.Chain
+import io.horizontalsystems.komercokit.models.TransactionData
 import io.horizontalsystems.uniswapkit.contract.*
 import io.horizontalsystems.uniswapkit.models.*
 import io.horizontalsystems.uniswapkit.models.Token.Erc20
@@ -16,7 +16,7 @@ import java.util.*
 import java.util.logging.Logger
 
 class TradeManager(
-    private val evmKit: EthereumKit
+    private val evmKit: KomercoKit
 ) {
     private val address: Address = evmKit.receiveAddress
     private val logger = Logger.getLogger(this.javaClass.simpleName)
@@ -123,7 +123,7 @@ class TradeManager(
 
         private fun getRouterAddress(chain: Chain) =
             when (chain) {
-                Chain.Ethereum, Chain.EthereumGoerli -> Address("0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D")
+                Chain.Komerco, Chain.KomercoGoerli -> Address("0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D")
                 Chain.BinanceSmartChain -> Address("0x10ED43C718714eb63d5aA57B78B54704E256024E")
                 Chain.Polygon -> Address("0xa5E0829CaCEd8fFDD4De3c43696c57F7D7A678ff")
                 Chain.Avalanche -> Address("0x60aE616a2155Ee3d9A68541Ba4544862310933d4")
@@ -132,7 +132,7 @@ class TradeManager(
 
         private fun getFactoryAddressString(chain: Chain) =
             when (chain) {
-                Chain.Ethereum, Chain.EthereumGoerli -> "0x5C69bEe701ef814a2B6a3EDD4B1652CB9cc5aA6f"
+                Chain.Komerco, Chain.KomercoGoerli -> "0x5C69bEe701ef814a2B6a3EDD4B1652CB9cc5aA6f"
                 Chain.BinanceSmartChain -> "0xcA143Ce32Fe78f1f7019d7d551a6402fC5350c73"
                 Chain.Polygon -> "0x5757371414417b8C6CAad45bAeF941aBc7d3Ab32"
                 Chain.Avalanche -> "0x9Ad6C38BE94206cA50bb0d90783181662f0Cfa10"
@@ -141,7 +141,7 @@ class TradeManager(
 
         private fun getInitCodeHashString(chain: Chain) =
             when (chain) {
-                Chain.Ethereum, Chain.EthereumGoerli, Chain.Polygon, Chain.Avalanche -> "0x96e8ac4277198ff8b6f785478aa9a39f403cb768dd02cbee326c3e7da348845f"
+                Chain.Komerco, Chain.KomercoGoerli, Chain.Polygon, Chain.Avalanche -> "0x96e8ac4277198ff8b6f785478aa9a39f403cb768dd02cbee326c3e7da348845f"
                 Chain.BinanceSmartChain -> "0x00fb7f630766e6a796048ea87d01acd3068e8ff67d078148a3fa3f4a84f69bd5"
                 else -> throw UnsupportedChainError.NoInitCodeHash
             }

@@ -1,11 +1,11 @@
 package io.horizontalsystems.nftkit.core
 
-import io.horizontalsystems.ethereumkit.contracts.ContractEventInstance
-import io.horizontalsystems.ethereumkit.contracts.ContractMethod
-import io.horizontalsystems.ethereumkit.core.ITransactionDecorator
-import io.horizontalsystems.ethereumkit.decorations.TransactionDecoration
-import io.horizontalsystems.ethereumkit.models.Address
-import io.horizontalsystems.ethereumkit.models.InternalTransaction
+import io.horizontalsystems.komercokit.contracts.ContractEventInstance
+import io.horizontalsystems.komercokit.contracts.ContractMethod
+import io.horizontalsystems.komercokit.core.ITransactionDecorator
+import io.horizontalsystems.komercokit.decorations.TransactionDecoration
+import io.horizontalsystems.komercokit.models.Address
+import io.horizontalsystems.komercokit.models.InternalTransaction
 import io.horizontalsystems.nftkit.contracts.Eip1155SafeTransferFromMethod
 import io.horizontalsystems.nftkit.decorations.OutgoingEip1155Decoration
 import io.horizontalsystems.nftkit.events.Eip1155TransferEventInstance

@@ -5,7 +5,7 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
-import io.horizontalsystems.ethereumkit.api.storage.RoomTypeConverters
+import io.horizontalsystems.komercokit.api.storage.RoomTypeConverters
 import io.horizontalsystems.nftkit.models.Eip1155Event
 import io.horizontalsystems.nftkit.models.Eip721Event
 import io.horizontalsystems.nftkit.models.NftBalanceRecord

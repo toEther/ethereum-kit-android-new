@@ -1,13 +1,13 @@
 package io.horizontalsystems.oneinchkit.decorations
 
 import io.horizontalsystems.erc20kit.events.TransferEventInstance
-import io.horizontalsystems.ethereumkit.contracts.Bytes32Array
-import io.horizontalsystems.ethereumkit.contracts.ContractEventInstance
-import io.horizontalsystems.ethereumkit.contracts.ContractMethod
-import io.horizontalsystems.ethereumkit.core.ITransactionDecorator
-import io.horizontalsystems.ethereumkit.decorations.TransactionDecoration
-import io.horizontalsystems.ethereumkit.models.Address
-import io.horizontalsystems.ethereumkit.models.InternalTransaction
+import io.horizontalsystems.komercokit.contracts.Bytes32Array
+import io.horizontalsystems.komercokit.contracts.ContractEventInstance
+import io.horizontalsystems.komercokit.contracts.ContractMethod
+import io.horizontalsystems.komercokit.core.ITransactionDecorator
+import io.horizontalsystems.komercokit.decorations.TransactionDecoration
+import io.horizontalsystems.komercokit.models.Address
+import io.horizontalsystems.komercokit.models.InternalTransaction
 import io.horizontalsystems.oneinchkit.contracts.v4.SwapMethodV4
 import io.horizontalsystems.oneinchkit.contracts.v4.UnoswapMethodV4
 import io.horizontalsystems.oneinchkit.contracts.v4.UnparsedSwapMethodV4

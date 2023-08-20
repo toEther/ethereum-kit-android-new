@@ -1,10 +1,10 @@
 package io.horizontalsystems.oneinchkit
 
 import com.google.gson.GsonBuilder
-import io.horizontalsystems.ethereumkit.models.Address
-import io.horizontalsystems.ethereumkit.models.Chain
-import io.horizontalsystems.ethereumkit.models.GasPrice
-import io.horizontalsystems.ethereumkit.network.*
+import io.horizontalsystems.komercokit.models.Address
+import io.horizontalsystems.komercokit.models.Chain
+import io.horizontalsystems.komercokit.models.GasPrice
+import io.horizontalsystems.komercokit.network.*
 import io.reactivex.Single
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor

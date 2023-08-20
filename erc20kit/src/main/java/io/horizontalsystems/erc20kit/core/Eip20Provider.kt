@@ -4,14 +4,14 @@ import io.horizontalsystems.erc20kit.contract.DecimalsMethod
 import io.horizontalsystems.erc20kit.contract.NameMethod
 import io.horizontalsystems.erc20kit.contract.SymbolMethod
 import io.horizontalsystems.erc20kit.events.TokenInfo
-import io.horizontalsystems.ethereumkit.api.core.IRpcApiProvider
-import io.horizontalsystems.ethereumkit.api.core.RpcBlockchain
-import io.horizontalsystems.ethereumkit.contracts.ContractMethodHelper
-import io.horizontalsystems.ethereumkit.core.EthereumKit
-import io.horizontalsystems.ethereumkit.models.Address
-import io.horizontalsystems.ethereumkit.models.DefaultBlockParameter
-import io.horizontalsystems.ethereumkit.models.RpcSource
-import io.horizontalsystems.ethereumkit.spv.core.toBigInteger
+import io.horizontalsystems.komercokit.api.core.IRpcApiProvider
+import io.horizontalsystems.komercokit.api.core.RpcBlockchain
+import io.horizontalsystems.komercokit.contracts.ContractMethodHelper
+import io.horizontalsystems.komercokit.core.KomercoKit
+import io.horizontalsystems.komercokit.models.Address
+import io.horizontalsystems.komercokit.models.DefaultBlockParameter
+import io.horizontalsystems.komercokit.models.RpcSource
+import io.horizontalsystems.komercokit.spv.core.toBigInteger
 import io.reactivex.Single
 
 class Eip20Provider(private val provider: IRpcApiProvider) {
@@ -87,7 +87,7 @@ class Eip20Provider(private val provider: IRpcApiProvider) {
     companion object {
 
         fun instance(rpcSource: RpcSource.Http): Eip20Provider {
-            return Eip20Provider(EthereumKit.getNodeApiProvider(rpcSource))
+            return Eip20Provider(KomercoKit.getNodeApiProvider(rpcSource))
         }
 
     }

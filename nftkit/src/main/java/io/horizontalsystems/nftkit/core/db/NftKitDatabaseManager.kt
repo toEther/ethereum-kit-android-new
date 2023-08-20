@@ -1,7 +1,7 @@
 package io.horizontalsystems.nftkit.core.db
 
 import android.content.Context
-import io.horizontalsystems.ethereumkit.models.Chain
+import io.horizontalsystems.komercokit.models.Chain
 
 internal object NftKitDatabaseManager {
 
