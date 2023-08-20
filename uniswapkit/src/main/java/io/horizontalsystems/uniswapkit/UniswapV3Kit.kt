@@ -2,7 +2,6 @@ package io.horizontalsystems.uniswapkit
 
 import io.horizontalsystems.ethereumkit.core.EthereumKit
 import io.horizontalsystems.ethereumkit.models.Address
-import io.horizontalsystems.uniswapkit.models.DexType
 import io.horizontalsystems.uniswapkit.models.Token
 import io.horizontalsystems.uniswapkit.models.TradeOptions
 import io.horizontalsystems.uniswapkit.v3.PriceImpactManager
@@ -11,13 +10,13 @@ import io.horizontalsystems.uniswapkit.v3.UniswapV3MethodDecorator
 import io.horizontalsystems.uniswapkit.v3.UniswapV3TransactionDecorator
 import io.horizontalsystems.uniswapkit.v3.contract.UniswapV3ContractMethodFactories
 import io.horizontalsystems.uniswapkit.v3.pool.PoolManager
-import io.horizontalsystems.uniswapkit.v3.quoter.QuoterV2
+import io.horizontalsystems.uniswapkit.v3.quoter.Quoter
 import io.horizontalsystems.uniswapkit.v3.router.SwapRouter
 import java.math.BigDecimal
 import java.math.BigInteger
 
 class UniswapV3Kit(
-    private val quoter: QuoterV2,
+    private val quoter: Quoter,
     private val swapRouter: SwapRouter,
     private val tokenFactory: TokenFactory,
     private val priceImpactManager: PriceImpactManager
@@ -87,11 +86,11 @@ class UniswapV3Kit(
     fun transactionData(tradeData: TradeDataV3) = swapRouter.transactionData(tradeData)
 
     companion object {
-        fun getInstance(ethereumKit: EthereumKit, dexType: DexType): UniswapV3Kit {
+        fun getInstance(ethereumKit: EthereumKit): UniswapV3Kit {
             val tokenFactory = TokenFactory(ethereumKit.chain)
-            val quoter = QuoterV2(ethereumKit, tokenFactory.etherToken(), dexType)
-            val swapRouter = SwapRouter(ethereumKit, dexType)
-            val poolManager = PoolManager(ethereumKit, dexType)
+            val quoter = Quoter(ethereumKit, tokenFactory.etherToken())
+            val swapRouter = SwapRouter(ethereumKit)
+            val poolManager = PoolManager(ethereumKit)
             val priceImpactManager = PriceImpactManager(poolManager)
 
             return UniswapV3Kit(quoter, swapRouter, tokenFactory, priceImpactManager)
