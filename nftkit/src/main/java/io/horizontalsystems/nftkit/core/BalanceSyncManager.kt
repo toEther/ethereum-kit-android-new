@@ -1,8 +1,8 @@
 package io.horizontalsystems.nftkit.core
 
 import android.util.Log
-import io.horizontalsystems.komercokit.api.jsonrpc.JsonRpc
-import io.horizontalsystems.komercokit.models.Address
+import io.horizontalsystems.ethereumkit.api.jsonrpc.JsonRpc
+import io.horizontalsystems.ethereumkit.models.Address
 import io.horizontalsystems.nftkit.models.Nft
 import io.horizontalsystems.nftkit.models.NftType
 import kotlinx.coroutines.Dispatchers

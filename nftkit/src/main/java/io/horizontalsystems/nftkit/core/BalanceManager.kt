@@ -1,6 +1,6 @@
 package io.horizontalsystems.nftkit.core
 
-import io.horizontalsystems.komercokit.models.Address
+import io.horizontalsystems.ethereumkit.models.Address
 import io.horizontalsystems.nftkit.models.Nft
 import io.horizontalsystems.nftkit.models.NftBalance
 import io.horizontalsystems.nftkit.models.NftType

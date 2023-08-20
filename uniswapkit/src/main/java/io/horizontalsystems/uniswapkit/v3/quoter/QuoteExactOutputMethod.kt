@@ -1,6 +1,6 @@
 package io.horizontalsystems.uniswapkit.v3.quoter
 
-import io.horizontalsystems.komercokit.contracts.ContractMethod
+import io.horizontalsystems.ethereumkit.contracts.ContractMethod
 import io.horizontalsystems.uniswapkit.v3.SwapPath
 import java.math.BigInteger
 

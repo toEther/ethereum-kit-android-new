@@ -1,25 +1,25 @@
 package io.horizontalsystems.uniswapkit.v3.router
 
-import io.horizontalsystems.komercokit.core.KomercoKit
-import io.horizontalsystems.komercokit.models.Address
-import io.horizontalsystems.komercokit.models.Chain
-import io.horizontalsystems.komercokit.models.TransactionData
+import io.horizontalsystems.ethereumkit.core.EthereumKit
+import io.horizontalsystems.ethereumkit.models.Address
+import io.horizontalsystems.ethereumkit.models.Chain
+import io.horizontalsystems.ethereumkit.models.TransactionData
 import io.horizontalsystems.uniswapkit.models.TradeType
 import io.horizontalsystems.uniswapkit.v3.TradeDataV3
 import java.math.BigInteger
 
-class SwapRouter(private val komercoKit: KomercoKit) {
-    val swapRouterAddress = when (komercoKit.chain) {
-        Chain.Komerco,
+class SwapRouter(private val ethereumKit: EthereumKit) {
+    val swapRouterAddress = when (ethereumKit.chain) {
+        Chain.Ethereum,
         Chain.Polygon,
         Chain.Optimism,
         Chain.ArbitrumOne,
-        Chain.KomercoGoerli -> Address("0x68b3465833fb72A70ecDF485E0e4C7bD8665Fc45")
-        else -> throw IllegalStateException("Not supported chain ${komercoKit.chain}")
+        Chain.EthereumGoerli -> Address("0x68b3465833fb72A70ecDF485E0e4C7bD8665Fc45")
+        else -> throw IllegalStateException("Not supported chain ${ethereumKit.chain}")
     }
 
     fun transactionData(tradeData: TradeDataV3): TransactionData {
-        val recipient = tradeData.options.recipient ?: komercoKit.receiveAddress
+        val recipient = tradeData.options.recipient ?: ethereumKit.receiveAddress
 
         val swapRecipient = when {
             tradeData.tokenOut.isEther -> Address("0x0000000000000000000000000000000000000002")

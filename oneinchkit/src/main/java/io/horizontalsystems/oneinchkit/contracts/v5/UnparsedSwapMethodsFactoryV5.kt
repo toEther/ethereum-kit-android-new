@@ -1,8 +1,8 @@
 package io.horizontalsystems.oneinchkit.contracts.v5
 
-import io.horizontalsystems.komercokit.contracts.ContractMethod
-import io.horizontalsystems.komercokit.contracts.ContractMethodsFactory
-import io.horizontalsystems.komercokit.core.hexStringToByteArray
+import io.horizontalsystems.ethereumkit.contracts.ContractMethod
+import io.horizontalsystems.ethereumkit.contracts.ContractMethodsFactory
+import io.horizontalsystems.ethereumkit.core.hexStringToByteArray
 
 class UnparsedSwapMethodsFactoryV5 : ContractMethodsFactory {
 

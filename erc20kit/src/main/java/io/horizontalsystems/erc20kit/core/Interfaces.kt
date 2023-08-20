@@ -1,6 +1,6 @@
 package io.horizontalsystems.erc20kit.core
 
-import io.horizontalsystems.komercokit.models.Address
+import io.horizontalsystems.ethereumkit.models.Address
 import io.reactivex.Single
 import java.math.BigInteger
 

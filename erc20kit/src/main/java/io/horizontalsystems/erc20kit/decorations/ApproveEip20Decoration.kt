@@ -1,9 +1,9 @@
 package io.horizontalsystems.erc20kit.decorations
 
-import io.horizontalsystems.komercokit.contracts.ContractEvent
-import io.horizontalsystems.komercokit.decorations.TransactionDecoration
-import io.horizontalsystems.komercokit.models.Address
-import io.horizontalsystems.komercokit.models.TransactionTag
+import io.horizontalsystems.ethereumkit.contracts.ContractEvent
+import io.horizontalsystems.ethereumkit.decorations.TransactionDecoration
+import io.horizontalsystems.ethereumkit.models.Address
+import io.horizontalsystems.ethereumkit.models.TransactionTag
 import java.math.BigInteger
 
 class ApproveEip20Decoration(

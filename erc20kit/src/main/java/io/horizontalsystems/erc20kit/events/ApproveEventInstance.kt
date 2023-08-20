@@ -1,7 +1,7 @@
 package io.horizontalsystems.erc20kit.events
 
-import io.horizontalsystems.komercokit.contracts.ContractEventInstance
-import io.horizontalsystems.komercokit.models.Address
+import io.horizontalsystems.ethereumkit.contracts.ContractEventInstance
+import io.horizontalsystems.ethereumkit.models.Address
 import java.math.BigInteger
 
 class ApproveEventInstance(

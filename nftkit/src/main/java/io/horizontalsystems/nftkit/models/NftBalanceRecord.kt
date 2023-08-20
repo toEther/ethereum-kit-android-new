@@ -1,7 +1,7 @@
 package io.horizontalsystems.nftkit.models
 
 import androidx.room.Entity
-import io.horizontalsystems.komercokit.models.Address
+import io.horizontalsystems.ethereumkit.models.Address
 import java.math.BigInteger
 
 @Entity(primaryKeys = ["contractAddress", "tokenId"])

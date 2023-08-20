@@ -1,6 +1,6 @@
 package io.horizontalsystems.oneinchkit.contracts
 
-import io.horizontalsystems.komercokit.contracts.ContractMethodFactories
+import io.horizontalsystems.ethereumkit.contracts.ContractMethodFactories
 import io.horizontalsystems.oneinchkit.contracts.v4.SwapMethodFactoryV4
 import io.horizontalsystems.oneinchkit.contracts.v4.UnoswapMethodFactoryV4
 import io.horizontalsystems.oneinchkit.contracts.v4.UnparsedSwapMethodsFactoryV4

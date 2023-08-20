@@ -2,8 +2,8 @@ package io.horizontalsystems.erc20kit.core
 
 import android.content.Context
 import io.horizontalsystems.erc20kit.core.room.Erc20KitDatabase
-import io.horizontalsystems.komercokit.models.Address
-import io.horizontalsystems.komercokit.models.Chain
+import io.horizontalsystems.ethereumkit.models.Address
+import io.horizontalsystems.ethereumkit.models.Chain
 
 internal object Erc20DatabaseManager {
 

@@ -1,6 +1,6 @@
 package io.horizontalsystems.erc20kit.contract
 
-import io.horizontalsystems.komercokit.contracts.ContractMethod
+import io.horizontalsystems.ethereumkit.contracts.ContractMethod
 
 class DecimalsMethod: ContractMethod() {
     override var methodSignature = "decimals()"

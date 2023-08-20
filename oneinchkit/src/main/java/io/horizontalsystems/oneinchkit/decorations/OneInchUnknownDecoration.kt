@@ -1,7 +1,7 @@
 package io.horizontalsystems.oneinchkit.decorations
 
-import io.horizontalsystems.komercokit.models.Address
-import io.horizontalsystems.komercokit.models.TransactionTag
+import io.horizontalsystems.ethereumkit.models.Address
+import io.horizontalsystems.ethereumkit.models.TransactionTag
 import java.math.BigInteger
 
 class OneInchUnknownDecoration(

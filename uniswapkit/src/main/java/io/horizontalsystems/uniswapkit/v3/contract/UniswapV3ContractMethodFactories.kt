@@ -1,6 +1,6 @@
 package io.horizontalsystems.uniswapkit.v3.contract
 
-import io.horizontalsystems.komercokit.contracts.ContractMethodFactories
+import io.horizontalsystems.ethereumkit.contracts.ContractMethodFactories
 import io.horizontalsystems.uniswapkit.v3.router.*
 
 object UniswapV3ContractMethodFactories : ContractMethodFactories() {

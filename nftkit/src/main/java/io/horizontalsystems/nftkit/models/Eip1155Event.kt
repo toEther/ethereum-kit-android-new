@@ -3,8 +3,8 @@ package io.horizontalsystems.nftkit.models
 import androidx.room.Entity
 import androidx.room.Ignore
 import androidx.room.PrimaryKey
-import io.horizontalsystems.komercokit.core.toHexString
-import io.horizontalsystems.komercokit.models.Address
+import io.horizontalsystems.ethereumkit.core.toHexString
+import io.horizontalsystems.ethereumkit.models.Address
 import java.math.BigInteger
 
 @Entity

@@ -1,9 +1,9 @@
 package io.horizontalsystems.uniswapkit.decorations
 
 import io.horizontalsystems.erc20kit.events.TokenInfo
-import io.horizontalsystems.komercokit.decorations.TransactionDecoration
-import io.horizontalsystems.komercokit.models.Address
-import io.horizontalsystems.komercokit.models.TransactionTag
+import io.horizontalsystems.ethereumkit.decorations.TransactionDecoration
+import io.horizontalsystems.ethereumkit.models.Address
+import io.horizontalsystems.ethereumkit.models.TransactionTag
 import java.math.BigInteger
 
 class SwapDecoration(

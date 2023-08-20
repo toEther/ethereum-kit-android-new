@@ -1,9 +1,9 @@
 package io.horizontalsystems.nftkit.core
 
-import io.horizontalsystems.komercokit.core.ITransactionProvider
-import io.horizontalsystems.komercokit.core.ITransactionSyncer
-import io.horizontalsystems.komercokit.models.ProviderEip1155Transaction
-import io.horizontalsystems.komercokit.models.Transaction
+import io.horizontalsystems.ethereumkit.core.ITransactionProvider
+import io.horizontalsystems.ethereumkit.core.ITransactionSyncer
+import io.horizontalsystems.ethereumkit.models.ProviderEip1155Transaction
+import io.horizontalsystems.ethereumkit.models.Transaction
 import io.horizontalsystems.nftkit.models.Eip1155Event
 import io.horizontalsystems.nftkit.models.Nft
 import io.horizontalsystems.nftkit.models.NftType

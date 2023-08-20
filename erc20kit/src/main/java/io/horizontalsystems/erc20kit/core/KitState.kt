@@ -1,7 +1,7 @@
 package io.horizontalsystems.erc20kit.core
 
-import io.horizontalsystems.komercokit.core.KomercoKit.SyncError
-import io.horizontalsystems.komercokit.core.KomercoKit.SyncState
+import io.horizontalsystems.ethereumkit.core.EthereumKit.SyncError
+import io.horizontalsystems.ethereumkit.core.EthereumKit.SyncState
 import io.reactivex.subjects.PublishSubject
 import java.math.BigInteger
 

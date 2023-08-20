@@ -1,11 +1,11 @@
 package io.horizontalsystems.oneinchkit
 
 import com.google.gson.annotations.SerializedName
-import io.horizontalsystems.komercokit.core.KomercoKit
-import io.horizontalsystems.komercokit.core.toHexString
-import io.horizontalsystems.komercokit.models.Address
-import io.horizontalsystems.komercokit.models.Chain
-import io.horizontalsystems.komercokit.models.GasPrice
+import io.horizontalsystems.ethereumkit.core.EthereumKit
+import io.horizontalsystems.ethereumkit.core.toHexString
+import io.horizontalsystems.ethereumkit.models.Address
+import io.horizontalsystems.ethereumkit.models.Chain
+import io.horizontalsystems.ethereumkit.models.GasPrice
 import io.horizontalsystems.oneinchkit.contracts.OneInchContractMethodFactories
 import io.horizontalsystems.oneinchkit.decorations.OneInchMethodDecorator
 import io.horizontalsystems.oneinchkit.decorations.OneInchTransactionDecorator
@@ -13,12 +13,12 @@ import java.math.BigInteger
 import java.util.*
 
 class OneInchKit(
-    private val evmKit: KomercoKit,
+    private val evmKit: EthereumKit,
     private val service: OneInchService
 ) {
 
     val routerAddress: Address = when (evmKit.chain) {
-        Chain.Komerco,
+        Chain.Ethereum,
         Chain.BinanceSmartChain,
         Chain.Polygon,
         Chain.Optimism,
@@ -90,12 +90,12 @@ class OneInchKit(
     )
 
     companion object {
-        fun getInstance(evmKit: KomercoKit): OneInchKit {
+        fun getInstance(evmKit: EthereumKit): OneInchKit {
             val service = OneInchService(evmKit.chain)
             return OneInchKit(evmKit, service)
         }
 
-        fun addDecorators(evmKit: KomercoKit) {
+        fun addDecorators(evmKit: EthereumKit) {
             evmKit.addMethodDecorator(OneInchMethodDecorator(OneInchContractMethodFactories))
             evmKit.addTransactionDecorator(OneInchTransactionDecorator(evmKit.receiveAddress))
         }

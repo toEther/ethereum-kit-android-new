@@ -1,9 +1,9 @@
 package io.horizontalsystems.nftkit.core
 
 import android.content.Context
-import io.horizontalsystems.komercokit.core.KomercoKit
-import io.horizontalsystems.komercokit.models.Address
-import io.horizontalsystems.komercokit.models.TransactionData
+import io.horizontalsystems.ethereumkit.core.EthereumKit
+import io.horizontalsystems.ethereumkit.models.Address
+import io.horizontalsystems.ethereumkit.models.TransactionData
 import io.horizontalsystems.nftkit.contracts.Eip1155ContractMethodFactories
 import io.horizontalsystems.nftkit.contracts.Eip721ContractMethodFactories
 import io.horizontalsystems.nftkit.core.db.NftKitDatabaseManager
@@ -19,7 +19,7 @@ import kotlinx.coroutines.reactive.asFlow
 import java.math.BigInteger
 
 class NftKit(
-    private val evmKit: KomercoKit,
+    private val evmKit: EthereumKit,
     private val balanceManager: BalanceManager,
     private val balanceSyncManager: BalanceSyncManager,
     private val transactionManager: TransactionManager,
@@ -49,7 +49,7 @@ class NftKit(
     }
 
     fun sync() {
-        if (evmKit.syncState is KomercoKit.SyncState.Synced) {
+        if (evmKit.syncState is EthereumKit.SyncState.Synced) {
             coroutineScope.launch {
                 balanceSyncManager.sync()
             }
@@ -101,11 +101,11 @@ class NftKit(
         evmKit.addTransactionDecorator(Eip1155TransactionDecorator(evmKit.receiveAddress))
     }
 
-    private suspend fun onSyncStateUpdate(syncState: KomercoKit.SyncState) {
+    private suspend fun onSyncStateUpdate(syncState: EthereumKit.SyncState) {
         when (syncState) {
-            is KomercoKit.SyncState.NotSynced -> Unit
-            is KomercoKit.SyncState.Syncing -> Unit
-            is KomercoKit.SyncState.Synced -> {
+            is EthereumKit.SyncState.NotSynced -> Unit
+            is EthereumKit.SyncState.Syncing -> Unit
+            is EthereumKit.SyncState.Synced -> {
                 balanceSyncManager.sync()
             }
         }
@@ -114,7 +114,7 @@ class NftKit(
     companion object {
         fun getInstance(
             context: Context,
-            evmKit: KomercoKit
+            evmKit: EthereumKit
         ): NftKit {
             val nftKitDatabase = NftKitDatabaseManager.getNftKitDatabase(context, evmKit.chain, evmKit.walletId)
             val storage = Storage(nftKitDatabase)

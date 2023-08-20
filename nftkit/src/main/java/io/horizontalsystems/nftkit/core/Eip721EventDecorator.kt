@@ -1,10 +1,10 @@
 package io.horizontalsystems.nftkit.core
 
-import io.horizontalsystems.komercokit.contracts.ContractEventInstance
-import io.horizontalsystems.komercokit.core.IEventDecorator
-import io.horizontalsystems.komercokit.models.Address
-import io.horizontalsystems.komercokit.models.Transaction
-import io.horizontalsystems.komercokit.models.TransactionLog
+import io.horizontalsystems.ethereumkit.contracts.ContractEventInstance
+import io.horizontalsystems.ethereumkit.core.IEventDecorator
+import io.horizontalsystems.ethereumkit.models.Address
+import io.horizontalsystems.ethereumkit.models.Transaction
+import io.horizontalsystems.ethereumkit.models.TransactionLog
 import io.horizontalsystems.nftkit.events.Eip721TransferEventInstance
 import io.horizontalsystems.nftkit.models.TokenInfo
 

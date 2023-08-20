@@ -1,7 +1,7 @@
 package io.horizontalsystems.uniswapkit
 
-import io.horizontalsystems.komercokit.core.KomercoKit
-import io.horizontalsystems.komercokit.models.Address
+import io.horizontalsystems.ethereumkit.core.EthereumKit
+import io.horizontalsystems.ethereumkit.models.Address
 import io.horizontalsystems.uniswapkit.models.Token
 import io.horizontalsystems.uniswapkit.models.TradeOptions
 import io.horizontalsystems.uniswapkit.v3.PriceImpactManager
@@ -86,20 +86,20 @@ class UniswapV3Kit(
     fun transactionData(tradeData: TradeDataV3) = swapRouter.transactionData(tradeData)
 
     companion object {
-        fun getInstance(komercoKit: KomercoKit): UniswapV3Kit {
-            val tokenFactory = TokenFactory(komercoKit.chain)
-            val quoter = Quoter(komercoKit, tokenFactory.etherToken())
-            val swapRouter = SwapRouter(komercoKit)
-            val poolManager = PoolManager(komercoKit)
+        fun getInstance(ethereumKit: EthereumKit): UniswapV3Kit {
+            val tokenFactory = TokenFactory(ethereumKit.chain)
+            val quoter = Quoter(ethereumKit, tokenFactory.etherToken())
+            val swapRouter = SwapRouter(ethereumKit)
+            val poolManager = PoolManager(ethereumKit)
             val priceImpactManager = PriceImpactManager(poolManager)
 
             return UniswapV3Kit(quoter, swapRouter, tokenFactory, priceImpactManager)
         }
 
-        fun addDecorators(komercoKit: KomercoKit) {
-            val tokenFactory = TokenFactory(komercoKit.chain)
-            komercoKit.addMethodDecorator(UniswapV3MethodDecorator(UniswapV3ContractMethodFactories))
-            komercoKit.addTransactionDecorator(UniswapV3TransactionDecorator(tokenFactory.wethAddress))
+        fun addDecorators(ethereumKit: EthereumKit) {
+            val tokenFactory = TokenFactory(ethereumKit.chain)
+            ethereumKit.addMethodDecorator(UniswapV3MethodDecorator(UniswapV3ContractMethodFactories))
+            ethereumKit.addTransactionDecorator(UniswapV3TransactionDecorator(tokenFactory.wethAddress))
         }
 
     }

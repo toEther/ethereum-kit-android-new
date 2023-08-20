@@ -1,7 +1,7 @@
 package io.horizontalsystems.uniswapkit.contract
 
-import io.horizontalsystems.komercokit.contracts.ContractMethod
-import io.horizontalsystems.komercokit.models.Address
+import io.horizontalsystems.ethereumkit.contracts.ContractMethod
+import io.horizontalsystems.ethereumkit.models.Address
 import java.math.BigInteger
 
 class SwapExactTokensForTokensMethod(

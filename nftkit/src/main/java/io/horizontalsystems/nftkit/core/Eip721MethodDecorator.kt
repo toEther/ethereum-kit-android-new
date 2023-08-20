@@ -1,8 +1,8 @@
 package io.horizontalsystems.nftkit.core
 
-import io.horizontalsystems.komercokit.contracts.ContractMethod
-import io.horizontalsystems.komercokit.contracts.ContractMethodFactories
-import io.horizontalsystems.komercokit.core.IMethodDecorator
+import io.horizontalsystems.ethereumkit.contracts.ContractMethod
+import io.horizontalsystems.ethereumkit.contracts.ContractMethodFactories
+import io.horizontalsystems.ethereumkit.core.IMethodDecorator
 
 class Eip721MethodDecorator(
     private val contractMethodFactories: ContractMethodFactories

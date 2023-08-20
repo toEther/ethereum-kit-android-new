@@ -1,8 +1,8 @@
 package io.horizontalsystems.oneinchkit.contracts.v4
 
-import io.horizontalsystems.komercokit.contracts.ContractMethod
-import io.horizontalsystems.komercokit.contracts.ContractMethodHelper
-import io.horizontalsystems.komercokit.contracts.ContractMethodsFactory
+import io.horizontalsystems.ethereumkit.contracts.ContractMethod
+import io.horizontalsystems.ethereumkit.contracts.ContractMethodHelper
+import io.horizontalsystems.ethereumkit.contracts.ContractMethodsFactory
 
 class UnparsedSwapMethodsFactoryV4 : ContractMethodsFactory {
     override val methodIds: List<ByteArray> = listOf(

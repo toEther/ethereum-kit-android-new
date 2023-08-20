@@ -1,8 +1,8 @@
 package io.horizontalsystems.nftkit.events
 
-import io.horizontalsystems.komercokit.contracts.ContractEvent
-import io.horizontalsystems.komercokit.contracts.ContractEventInstance
-import io.horizontalsystems.komercokit.models.Address
+import io.horizontalsystems.ethereumkit.contracts.ContractEvent
+import io.horizontalsystems.ethereumkit.contracts.ContractEventInstance
+import io.horizontalsystems.ethereumkit.models.Address
 import io.horizontalsystems.nftkit.models.TokenInfo
 import java.math.BigInteger
 

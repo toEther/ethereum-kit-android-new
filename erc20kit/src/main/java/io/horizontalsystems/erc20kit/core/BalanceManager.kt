@@ -1,6 +1,6 @@
 package io.horizontalsystems.erc20kit.core
 
-import io.horizontalsystems.komercokit.models.Address
+import io.horizontalsystems.ethereumkit.models.Address
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 import java.math.BigInteger

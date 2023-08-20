@@ -2,9 +2,9 @@ package io.horizontalsystems.erc20kit.core
 
 import android.content.Context
 import io.horizontalsystems.erc20kit.contract.Eip20ContractMethodFactories
-import io.horizontalsystems.komercokit.core.KomercoKit
-import io.horizontalsystems.komercokit.core.KomercoKit.SyncState
-import io.horizontalsystems.komercokit.models.*
+import io.horizontalsystems.ethereumkit.core.EthereumKit
+import io.horizontalsystems.ethereumkit.core.EthereumKit.SyncState
+import io.horizontalsystems.ethereumkit.models.*
 import io.reactivex.BackpressureStrategy
 import io.reactivex.Flowable
 import io.reactivex.Single
@@ -13,7 +13,7 @@ import io.reactivex.schedulers.Schedulers
 import java.math.BigInteger
 
 class Erc20Kit(
-        private val komercoKit: KomercoKit,
+        private val ethereumKit: EthereumKit,
         private val transactionManager: TransactionManager,
         private val balanceManager: IBalanceManager,
         private val allowanceManager: AllowanceManager,
@@ -23,10 +23,10 @@ class Erc20Kit(
     private val disposables = CompositeDisposable()
 
     init {
-        onSyncStateUpdate(komercoKit.syncState)
+        onSyncStateUpdate(ethereumKit.syncState)
         state.balance = balanceManager.balance
 
-        komercoKit.syncStateFlowable
+        ethereumKit.syncStateFlowable
                 .subscribe {
                     onSyncStateUpdate(it)
                 }.let {
@@ -49,10 +49,10 @@ class Erc20Kit(
         get() = state.syncStateSubject.toFlowable(BackpressureStrategy.LATEST)
 
     val transactionsSyncState: SyncState
-        get() = komercoKit.transactionsSyncState
+        get() = ethereumKit.transactionsSyncState
 
     val transactionsSyncStateFlowable: Flowable<SyncState>
-        get() = komercoKit.transactionsSyncStateFlowable
+        get() = ethereumKit.transactionsSyncStateFlowable
 
     val balance: BigInteger?
         get() = state.balance
@@ -121,36 +121,36 @@ class Erc20Kit(
 
         fun getInstance(
                 context: Context,
-                komercoKit: KomercoKit,
+                ethereumKit: EthereumKit,
                 contractAddress: Address
         ): Erc20Kit {
 
-            val address = komercoKit.receiveAddress
+            val address = ethereumKit.receiveAddress
 
-            val erc20KitDatabase = Erc20DatabaseManager.getErc20Database(context, komercoKit.chain, komercoKit.walletId, contractAddress)
+            val erc20KitDatabase = Erc20DatabaseManager.getErc20Database(context, ethereumKit.chain, ethereumKit.walletId, contractAddress)
             val roomStorage = Erc20Storage(erc20KitDatabase)
             val balanceStorage: ITokenBalanceStorage = roomStorage
 
-            val dataProvider: IDataProvider = DataProvider(komercoKit)
-            val transactionManager = TransactionManager(contractAddress, komercoKit)
+            val dataProvider: IDataProvider = DataProvider(ethereumKit)
+            val transactionManager = TransactionManager(contractAddress, ethereumKit)
             val balanceManager: IBalanceManager = BalanceManager(contractAddress, address, balanceStorage, dataProvider)
-            val allowanceManager = AllowanceManager(komercoKit, contractAddress, address)
+            val allowanceManager = AllowanceManager(ethereumKit, contractAddress, address)
 
-            val erc20Kit = Erc20Kit(komercoKit, transactionManager, balanceManager, allowanceManager)
+            val erc20Kit = Erc20Kit(ethereumKit, transactionManager, balanceManager, allowanceManager)
 
             balanceManager.listener = erc20Kit
 
             return erc20Kit
         }
 
-        fun addTransactionSyncer(komercoKit: KomercoKit) {
-            komercoKit.addTransactionSyncer(Erc20TransactionSyncer(komercoKit.transactionProvider, komercoKit.eip20Storage))
+        fun addTransactionSyncer(ethereumKit: EthereumKit) {
+            ethereumKit.addTransactionSyncer(Erc20TransactionSyncer(ethereumKit.transactionProvider, ethereumKit.eip20Storage))
         }
 
-        fun addDecorators(komercoKit: KomercoKit) {
-            komercoKit.addMethodDecorator(Eip20MethodDecorator(Eip20ContractMethodFactories))
-            komercoKit.addEventDecorator(Eip20EventDecorator(komercoKit.receiveAddress, komercoKit.eip20Storage))
-            komercoKit.addTransactionDecorator(Eip20TransactionDecorator(komercoKit.receiveAddress))
+        fun addDecorators(ethereumKit: EthereumKit) {
+            ethereumKit.addMethodDecorator(Eip20MethodDecorator(Eip20ContractMethodFactories))
+            ethereumKit.addEventDecorator(Eip20EventDecorator(ethereumKit.receiveAddress, ethereumKit.eip20Storage))
+            ethereumKit.addTransactionDecorator(Eip20TransactionDecorator(ethereumKit.receiveAddress))
         }
 
         fun clear(context: Context, chain: Chain, walletId: String) {

@@ -1,9 +1,9 @@
 package io.horizontalsystems.uniswapkit.v3.quoter
 
-import io.horizontalsystems.komercokit.core.KomercoKit
-import io.horizontalsystems.komercokit.models.Address
-import io.horizontalsystems.komercokit.models.Chain
-import io.horizontalsystems.komercokit.spv.core.toBigInteger
+import io.horizontalsystems.ethereumkit.core.EthereumKit
+import io.horizontalsystems.ethereumkit.models.Address
+import io.horizontalsystems.ethereumkit.models.Chain
+import io.horizontalsystems.ethereumkit.spv.core.toBigInteger
 import io.horizontalsystems.uniswapkit.TradeError
 import io.horizontalsystems.uniswapkit.models.Token
 import io.horizontalsystems.uniswapkit.models.TradeType
@@ -15,15 +15,15 @@ import kotlinx.coroutines.rx2.await
 import java.math.BigInteger
 import kotlin.coroutines.coroutineContext
 
-class Quoter(private val komercoKit: KomercoKit, private val weth: Token) {
+class Quoter(private val ethereumKit: EthereumKit, private val weth: Token) {
 
-    private val quoterAddress = when (komercoKit.chain) {
-        Chain.Komerco,
+    private val quoterAddress = when (ethereumKit.chain) {
+        Chain.Ethereum,
         Chain.Polygon,
         Chain.Optimism,
         Chain.ArbitrumOne,
-        Chain.KomercoGoerli -> "0xb27308f9F90D607463bb33eA1BeBb41C27CE5AB6"
-        else -> throw IllegalStateException("Not supported chain ${komercoKit.chain}")
+        Chain.EthereumGoerli -> "0xb27308f9F90D607463bb33eA1BeBb41C27CE5AB6"
+        else -> throw IllegalStateException("Not supported chain ${ethereumKit.chain}")
     }
 
     suspend fun bestTradeExactIn(
@@ -218,6 +218,6 @@ class Quoter(private val komercoKit: KomercoKit, private val weth: Token) {
     }
 
     private suspend fun ethCall(contractAddress: Address, data: ByteArray): ByteArray {
-        return komercoKit.call(contractAddress, data).await()
+        return ethereumKit.call(contractAddress, data).await()
     }
 }
